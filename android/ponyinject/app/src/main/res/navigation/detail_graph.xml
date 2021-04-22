@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/detail_graph"
+    app:startDestination="@+id/detail">
+
+    <fragment
+        android:id="@+id/detail"
+        android:name="me.tatarka.inject.ponyinject.detail.DetailFragment">
+        <argument
+            android:name="episodeId"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+</navigation>

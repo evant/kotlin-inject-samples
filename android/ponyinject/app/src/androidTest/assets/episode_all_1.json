@@ -1,0 +1,32 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "id": 1,
+      "name": "Friendship is Magic, part 1",
+      "image": "https://vignette.wikia.nocookie.net/mlp/images/9/9f/Twilight_looks_up_at_the_moon_S1E01.png/revision/latest?cb=20121209043547",
+      "url": "https://mlp.fandom.com/wiki/Friendship_is_Magic,_part_1",
+      "season": 1,
+      "episode": 1,
+      "overall": 1,
+      "airdate": "2010-10-10",
+      "writtenby": "Lauren Faust",
+      "storyboard": "Tom Sales\nMike West\nSherann Johnson\nSam To"
+    },
+    {
+      "id": 2,
+      "name": "Friendship is Magic, part 2",
+      "image": "https://vignette.wikia.nocookie.net/mlp/images/2/2c/Main_ponies_activated_the_Elements_of_Harmony_S01E02.png/revision/latest?cb=20111205172131",
+      "url": "https://mlp.fandom.com/wiki/Friendship_is_Magic,_part_2",
+      "season": 1,
+      "episode": 2,
+      "overall": 2,
+      "airdate": "2010-10-22",
+      "writtenby": "Lauren Faust",
+      "storyboard": "Tom Sales\nMike West\nSherann Johnson\nSam To",
+      "song": [
+        "Laughter Song"
+      ]
+    }
+  ]
+}
