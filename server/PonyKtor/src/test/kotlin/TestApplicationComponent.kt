@@ -1,9 +1,10 @@
-import db.FakeEpisodesDao
-import db.FakeSongsDao
-import me.tatarka.inject.ApplicationScope
+package me.tatarka.inject
+
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
 import me.tatarka.inject.db.EpisodesDao
+import me.tatarka.inject.db.FakeEpisodesDao
+import me.tatarka.inject.db.FakeSongsDao
 import me.tatarka.inject.db.SongsDao
 
 class TestFakes(

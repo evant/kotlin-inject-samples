@@ -1,7 +1,4 @@
-package db
-
-import me.tatarka.inject.db.SongEntity
-import me.tatarka.inject.db.SongsDao
+package me.tatarka.inject.db
 
 private val songs = listOf(
     FakeSongEntity(

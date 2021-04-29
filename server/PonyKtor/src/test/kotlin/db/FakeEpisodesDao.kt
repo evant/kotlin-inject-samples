@@ -1,8 +1,5 @@
-package db
+package me.tatarka.inject.db
 
-import me.tatarka.inject.db.EpisodeEntity
-import me.tatarka.inject.db.EpisodesDao
-import me.tatarka.inject.db.SongEntity
 import java.time.LocalDate
 
 class FakeEpisodeEntity(

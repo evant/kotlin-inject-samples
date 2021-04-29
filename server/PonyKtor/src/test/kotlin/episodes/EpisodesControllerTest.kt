@@ -1,19 +1,18 @@
-package episodes
+package me.tatarka.inject.episodes
 
-import TestApplicationComponent
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.extracting
 import assertk.assertions.isFailure
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
-import create
 import io.ktor.features.BadRequestException
 import io.ktor.http.parametersOf
 import me.tatarka.inject.Episode
-import me.tatarka.inject.episodes.EpisodesController
 import me.tatarka.inject.Response
+import me.tatarka.inject.TestApplicationComponent
 import me.tatarka.inject.annotations.Component
+import me.tatarka.inject.create
 import org.junit.Test
 
 /**

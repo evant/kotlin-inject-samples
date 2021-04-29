@@ -1,4 +1,4 @@
-package assert
+package me.tatarka.inject.assert
 
 import assertk.Assert
 import assertk.assertions.isEqualTo
