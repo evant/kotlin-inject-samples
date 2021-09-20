@@ -40,9 +40,29 @@ jobs:
           paths:
             - ~/.gradle
           key: ponyktor-{{ checksum "build.gradle.kts" }}
+  build-echo:
+    working_directory: ~/code/multiplatform/echo
+    docker:
+      - image: circleci/openjdk:11-jdk
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout:
+          path: ~/code
+      - restore_cache:
+          keys:
+            - echo-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Run Tests and Checks
+          command: ./gradlew check
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: echo-{{ checksum "build.gradle.kts" }}
 workflows:
   version: 2
   build:
     jobs:
       - build-ponyinject
       - build-ponyktor
+      - build-echo

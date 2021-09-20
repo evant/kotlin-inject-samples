@@ -33,5 +33,9 @@ dependencies {
     kaptTest("me.tatarka.inject:kotlin-inject-compiler-kapt:0.3.3")
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.ktor:ktor-server-test-host:1.5.3")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.23.1")
+    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+}
+
+tasks.wrapper {
+    jarFile = file("../../gradle/wrapper/gradle-wrapper.jar")
 }
