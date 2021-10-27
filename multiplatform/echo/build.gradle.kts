@@ -14,7 +14,7 @@ dependencies {
 
 val nativeTargets = arrayOf(
     "linuxX64",
-    "macosX64", "macosArm64"
+    "macosX64",
 )
 
 kotlin {
@@ -31,6 +31,8 @@ kotlin {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
                 implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.7-SNAPSHOT")
+                implementation("io.ktor:ktor-client-core:1.6.4")
+                implementation("io.ktor:ktor-client-serialization:1.6.4")
             }
         }
     }
