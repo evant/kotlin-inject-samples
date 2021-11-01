@@ -5,9 +5,22 @@ import me.tatarka.inject.annotations.Provides
 typealias Args = Array<String>
 
 @Component
-abstract class ApplicationComponent(@get:Provides val args: Args) {
+abstract class ApplicationComponent(
+    @get:Provides val args: Args,
+    @Component val other: OtherComponent = OtherComponent::class.create()
+) {
     abstract val app: App
+
+    @Provides fun string(): String = "bar"
 }
+
+@Component
+abstract class OtherComponent {
+    abstract val stringConsumer: StringConsumer
+}
+
+@Inject
+class StringConsumer(string: String)
 
 @Inject
 class ArgProcessor(private val args: Args) {

@@ -4,17 +4,17 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeCompile
 
 plugins {
-    kotlin("multiplatform") version "1.5.30"
-    id("com.google.devtools.ksp") version "1.5.30-1.0.0"
+    kotlin("multiplatform") version "1.6.0-RC"
+    id("com.google.devtools.ksp") version "1.6.0-RC-1.0.1-RC"
 }
 
 dependencies {
-    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.3.7-SNAPSHOT")
+    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.3.7-RC")
 }
 
 val nativeTargets = arrayOf(
     "linuxX64",
-    "macosX64", "macosArm64"
+    "macosX64"
 )
 
 kotlin {
@@ -30,7 +30,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-                implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.7-SNAPSHOT")
+                implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.7-RC")
             }
         }
     }
