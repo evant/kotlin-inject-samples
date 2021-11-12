@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin("multiplatform") version "1.6.0-RC"
-    id("com.google.devtools.ksp") version "1.6.0-RC-1.0.1-RC"
+    kotlin("multiplatform") version "1.5.31"
+    id("com.google.devtools.ksp") version "1.5.31-1.0.1"
 }
 
 dependencies {
-    add("kspMetadata", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.3.7-RC")
+    add("kspMetadata", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.4.0")
 }
 
 val nativeTargets = arrayOf(
@@ -27,7 +27,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-                implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.7-RC")
+                implementation("me.tatarka.inject:kotlin-inject-runtime:0.4.0")
             }
         }
     }
