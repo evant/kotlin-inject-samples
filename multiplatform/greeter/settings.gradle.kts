@@ -1,16 +1,16 @@
 pluginManagement {
-    repositories {
-        google()
-        gradlePluginPortal()
-        mavenCentral()
-    }
+  repositories {
+    mavenCentral()
+    google()
+    gradlePluginPortal()
+  }
 }
 
 dependencyResolutionManagement {
-    repositories {
-        google()
-        mavenCentral()
-    }
+  repositories {
+    mavenCentral()
+    google()
+  }
 }
 
 rootProject.name = "kotlin-inject-greeter"
