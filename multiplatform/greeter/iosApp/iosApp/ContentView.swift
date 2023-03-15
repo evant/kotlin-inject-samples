@@ -2,9 +2,14 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
+  private let greeter = ApplicationComponent.companion.create().greeter
+
+  // Or we can also access the generated implementation directly and drop our companion object
+//  private let greeter = InjectApplicationComponent().greeter
+
   var body: some View {
     Button {
-      // trigger greeting
+      greeter.greet()
     } label: {
       Text("Greet!")
     }
