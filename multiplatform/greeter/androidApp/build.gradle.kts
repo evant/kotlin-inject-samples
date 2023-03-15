@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.android.application)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -40,4 +41,7 @@ dependencies {
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.toolingPreview)
   debugRuntimeOnly(libs.compose.ui.tooling)
+
+  implementation(libs.kotlinInject.runtime)
+  ksp(libs.kotlinInject.compiler)
 }
