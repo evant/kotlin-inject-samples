@@ -1,7 +1,9 @@
 package com.fredporciuncula.inject.greeter
 
-interface Platform {
-  val name: String
+import kotlin.jvm.JvmInline
+
+enum class Platform(val displayName: String) {
+  Android("Android"), Ios("iOS")
 }
 
-expect fun getPlatform(): Platform
+@JvmInline value class Version(val value: String)
