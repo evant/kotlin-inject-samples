@@ -1,24 +1,6 @@
 # 🤖 Android Studio
 *.iml
-# We ignore everything from the IDE, except non user specific things
-/.idea/*
-# Auto-import exclusion list (Editor -> General -> Auto Import)
-!.idea/codeInsightSettings.xml
-# Code style setup (Editor -> Code Style)
-!.idea/codeStyles/
-# Detekt plugin configuration (Tools -> Detekt)
-!.idea/detekt.xml
-# Required plugins (Build, Execution, Deployment -> Required Plugins)
-!.idea/externalDependencies.xml
-# File and code templates and their metadata (Editor -> File and Code Templates)
-!.idea/fileTemplates/
-!.idea/file.template.settings.xml
-# Project icon
-!.idea/icon.svg
-# Code inspections setup (Editor -> Inspections)
-!.idea/inspectionProfiles/
-# Version control system metadata
-!.idea/vcs.xml
+/.idea/
 
 # 🍎 Xcode (from https://github.com/github/gitignore/blob/main/Swift.gitignore)
 # User settings
