@@ -6,7 +6,7 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-  targetHierarchy.default()
+  targetHierarchy.default() // https://kotlinlang.org/docs/whatsnew1820.html#new-approach-to-source-set-hierarchy
 
   android()
 
