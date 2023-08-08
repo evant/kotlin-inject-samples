@@ -8,7 +8,7 @@ plugins {
 kotlin {
   targetHierarchy.default() // https://kotlinlang.org/docs/whatsnew1820.html#new-approach-to-source-set-hierarchy
 
-  android()
+  androidTarget()
 
   listOf(
     iosX64(),
@@ -21,12 +21,12 @@ kotlin {
   }
 
   sourceSets {
-    val commonMain by getting {
+    commonMain {
       dependencies {
         implementation(libs.kotlinInject.runtime)
       }
     }
-    val commonTest by getting {
+    commonTest {
       dependencies {
         implementation(kotlin("test"))
       }
@@ -39,7 +39,6 @@ android {
   compileSdk = 33
   defaultConfig {
     minSdk = 24
-    targetSdk = 33
   }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
