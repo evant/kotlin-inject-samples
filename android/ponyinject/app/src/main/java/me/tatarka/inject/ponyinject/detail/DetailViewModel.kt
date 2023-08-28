@@ -3,6 +3,7 @@ package me.tatarka.inject.ponyinject.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.map
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import me.tatarka.inject.ponyinject.api.Episode
 import me.tatarka.inject.ponyinject.api.EpisodesRepository
@@ -15,7 +16,7 @@ private val DATE_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIU
  * view model for the episode details page.
  */
 @Inject
-class DetailViewModel(repository: EpisodesRepository, handle: SavedStateHandle) :
+class DetailViewModel(repository: EpisodesRepository, @Assisted handle: SavedStateHandle) :
     ViewModel() {
     private val episodeId: Int = handle["episodeId"]!!
 

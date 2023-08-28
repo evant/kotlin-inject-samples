@@ -1,23 +1,29 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.32"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.4.32"
-    kotlin("kapt") version "1.4.32"
+    kotlin("jvm") version "1.9.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
 }
 
 group = "me.tatarka.inject"
 version = "1.0-SNAPSHOT"
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "11"
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_11
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
 dependencies {
-    implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.3")
-    kapt("me.tatarka.inject:kotlin-inject-compiler-kapt:0.3.3")
+    implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.1")
+    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
 
     implementation("io.ktor:ktor-server-netty:1.5.3")
     implementation("ch.qos.logback:logback-classic:1.2.3")
@@ -30,7 +36,7 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.34.0")
     implementation( "com.zaxxer:HikariCP:3.4.5")
 
-    kaptTest("me.tatarka.inject:kotlin-inject-compiler-kapt:0.3.3")
+    kspTest("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.ktor:ktor-server-test-host:1.5.3")
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")

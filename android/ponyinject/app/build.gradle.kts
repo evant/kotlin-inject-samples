@@ -1,23 +1,24 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("com.google.devtools.ksp") version "1.5.30-1.0.0"
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
     id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
-    compileSdk = 31
+    compileSdk = 33
 
     defaultConfig {
+        namespace = "me.tatarka.inject.ponyinject"
         applicationId = "me.tatarka.inject.ponyinject"
         minSdk = 21
-        targetSdk = 30
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "BASE_URL", "\"https://ponyweb.ml/\"")
+        buildConfigField("String", "BASE_URL", "\"https://ponyapi.net/\"")
     }
 
     buildTypes {
@@ -31,31 +32,19 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
         freeCompilerArgs = listOf("-Xopt-in=kotlin.RequiresOptIn")
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     sourceSets {
-        // allows android studio to see ksp generated code
-        get("debug").java {
-            srcDir("build/generated/ksp/debug/kotlin")
-        }
-        get("release").java {
-            srcDir("build/generated/ksp/release/kotlin")
-        }
-        get("testDebug").java {
-            srcDir("build/generated/ksp/debugUnitTest/kotlin")
-        }
-        get("androidTestDebug").java {
-            srcDir("build/generated/ksp/debugAndroidTest/kotlin")
-        }
         // share code between unit and android tests
         get("test").java {
             srcDir("src/commonTest/java")
@@ -67,40 +56,40 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
 
-    implementation("me.tatarka.inject:kotlin-inject-runtime:0.3.6")
-    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.3.6")
+    implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.1")
+    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
 
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    debugImplementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    debugImplementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation("com.squareup.moshi:moshi:1.12.0")
     ksp("dev.zacsweers.moshix:moshi-ksp:0.12.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
-    implementation("io.coil-kt:coil:1.2.0")
+    implementation("io.coil-kt:coil:2.2.2")
 
-    implementation("androidx.core:core-ktx:1.6.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-beta01")
-    implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
-    implementation("androidx.navigation:navigation-ui-ktx:2.3.5")
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
-    implementation("androidx.slidingpanelayout:slidingpanelayout:1.2.0-beta01")
-    debugImplementation("androidx.fragment:fragment-testing:1.3.6")
-    implementation("androidx.paging:paging-runtime-ktx:3.0.1")
+    implementation("androidx.core:core-ktx:1.10.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.0")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.slidingpanelayout:slidingpanelayout:1.2.0")
+    debugImplementation("androidx.fragment:fragment-testing:1.6.1")
+    implementation("androidx.paging:paging-runtime-ktx:3.2.0")
 
     testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3")
-    testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("com.willowtreeapps.assertk:assertk:0.26.1")
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.9.1")
     androidTestImplementation("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0")
-    androidTestImplementation("com.willowtreeapps.assertk:assertk-jvm:0.24")
+    androidTestImplementation("com.willowtreeapps.assertk:assertk:0.26.1")
 }

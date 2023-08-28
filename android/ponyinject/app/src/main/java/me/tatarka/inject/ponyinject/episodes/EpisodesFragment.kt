@@ -19,7 +19,7 @@ import me.tatarka.inject.ponyinject.ui.TwoPaneOnBackPressedCallback
 import me.tatarka.inject.ponyinject.viewModels
 
 /**
- * Shows a list of episodes and navigates to their detail page one one is clicked. This uses a
+ * Shows a list of episodes and navigates to their detail page when one is clicked. This uses a
  * [SlidingPaneLayout] as described in [https://developer.android.com/guide/topics/ui/layout/twopane]
  */
 @Inject
@@ -56,13 +56,13 @@ class EpisodesFragment(viewModel: () -> EpisodesViewModel) : Fragment(R.layout.e
             DetailFragmentArgs(episodeId = id).toBundle(),
             NavOptions.Builder()
                 // Pop all destinations off the back stack.
-                .setPopUpTo(navController.graph.startDestination, true)
+                .setPopUpTo(navController.graph.startDestinationId, true)
                 .apply {
                     // If we're already open and the detail pane is visible,
                     // crossfade between the destinations.
                     if (root.isOpen) {
-                        setEnterAnim(R.animator.nav_default_enter_anim)
-                        setExitAnim(R.animator.nav_default_exit_anim)
+                        setEnterAnim(androidx.navigation.ui.R.animator.nav_default_enter_anim)
+                        setExitAnim(androidx.navigation.ui.R.animator.nav_default_exit_anim)
                     }
                 }
                 .build()
