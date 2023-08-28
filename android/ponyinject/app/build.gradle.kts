@@ -53,6 +53,9 @@ android {
             srcDir("src/commonTest/java")
         }
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -81,6 +84,7 @@ dependencies {
     implementation("androidx.slidingpanelayout:slidingpanelayout:1.2.0")
     debugImplementation("androidx.fragment:fragment-testing:1.6.1")
     implementation("androidx.paging:paging-runtime-ktx:3.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.arch.core:core-testing:2.2.0")

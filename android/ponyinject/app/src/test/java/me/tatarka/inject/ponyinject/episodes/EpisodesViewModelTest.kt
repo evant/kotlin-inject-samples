@@ -5,6 +5,7 @@ import assertk.assertions.containsExactly
 import assertk.assertions.extracting
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.ponyinject.CoroutineTestRule
 import me.tatarka.inject.ponyinject.TestApplicationComponent
@@ -22,7 +23,7 @@ class EpisodesViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
-    fun fetches_episodes() = runBlocking {
+    fun fetches_episodes() = runTest {
         val component = TestComponent::class.create()
         val viewModel = component.viewModel
         val episodes = viewModel.episodes.first()

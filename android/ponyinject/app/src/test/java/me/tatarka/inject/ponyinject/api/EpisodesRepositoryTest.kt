@@ -4,6 +4,7 @@ import assertk.assertThat
 import assertk.assertions.*
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.ponyinject.*
 import org.junit.Test
@@ -15,7 +16,7 @@ import java.io.IOException
 class EpisodesRepositoryTest {
 
     @Test
-    fun fetches_episodes_from_the_api() = runBlocking {
+    fun fetches_episodes_from_the_api() = runTest {
         val component = TestComponent::class.create()
         val repository = component.episodesRepository
         val episodes = repository.episodes.first()
@@ -27,7 +28,7 @@ class EpisodesRepositoryTest {
     }
 
     @Test
-    fun shows_error_if_fetch_fails() = runBlocking {
+    fun shows_error_if_fetch_fails() = runTest {
         val component = TestComponent::class.create(TestApplicationComponent::class.create(
             TestFakes(
                 service = object : FakeApiService() {
@@ -45,7 +46,7 @@ class EpisodesRepositoryTest {
     }
 
     @Test
-    fun fetches_a_single_episode_from_the_cache() = runBlocking {
+    fun fetches_a_single_episode_from_the_cache() = runTest {
         val component = TestComponent::class.create()
         val repository = component.episodesRepository
         repository.episodes.first().waitForSnapshot()
