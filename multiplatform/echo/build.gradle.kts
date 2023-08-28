@@ -1,47 +1,38 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import com.google.devtools.ksp.gradle.KspAATask
+import com.google.devtools.ksp.gradle.KspTask
 
 plugins {
-    kotlin("multiplatform") version "1.5.31"
-    id("com.google.devtools.ksp") version "1.5.31-1.0.1"
+    kotlin("multiplatform") version "1.9.10"
+    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
 }
-
-dependencies {
-    add("kspMetadata", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.4.0")
-}
-
-val nativeTargets = arrayOf(
-    "linuxX64",
-    "macosX64", "macosArm64"
-)
 
 kotlin {
-    for (target in nativeTargets) {
-        targets.add(presets.getByName(target).createTarget(target).apply {
-            require(this is KotlinNativeTarget)
-            binaries {
-                executable()
-            }
-        })
+    targetHierarchy.default()
+
+    listOf(
+        linuxX64(),
+        macosX64(), macosArm64()
+    ).forEach { target ->
+        target.binaries.executable()
     }
+
     sourceSets {
         commonMain {
             dependencies {
-                implementation("org.jetbrains.kotlin:kotlin-stdlib-common")
-                implementation("me.tatarka.inject:kotlin-inject-runtime:0.4.0")
+                implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.1")
             }
         }
     }
 }
 
-// Generate common code with ksp instead of per-platform, hopefully this won't be needed in the future.
-// https://github.com/google/ksp/issues/567
-kotlin.sourceSets.commonMain {
-    kotlin.srcDir("build/generated/ksp/commonMain/kotlin")
-}
-tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>().all {
-    if (name != "kspKotlinMetadata") {
-        dependsOn("kspKotlinMetadata")
-    }
+// KSP will eventually have better multiplatform support and we'll be able to simply have
+// `ksp libs.kotlinInject.compiler` in the dependencies block of each source set
+// https://github.com/google/ksp/pull/1021
+
+dependencies {
+    add("kspLinuxX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
+    add("kspMacosX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
+    add("kspMacosArm64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
 }
 
 tasks.wrapper {

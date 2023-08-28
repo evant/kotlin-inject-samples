@@ -9,6 +9,8 @@ abstract class ApplicationComponent(@get:Provides val args: Args) {
     abstract val app: App
 }
 
+expect fun createApplicationComponent(args: Args): ApplicationComponent
+
 @Inject
 class ArgProcessor(private val args: Args) {
     fun process(): String = args.joinToString(" ")
@@ -22,6 +24,6 @@ class App(private val argProcessor: ArgProcessor) {
 }
 
 fun main(args: Array<String>) {
-    val appComponent = ApplicationComponent::class.create(args)
+    val appComponent = createApplicationComponent(args)
     appComponent.app.run()
 }
