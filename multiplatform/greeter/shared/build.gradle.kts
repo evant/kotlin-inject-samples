@@ -4,10 +4,7 @@ plugins {
   alias(libs.plugins.ksp)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-  targetHierarchy.default() // https://kotlinlang.org/docs/whatsnew1820.html#new-approach-to-source-set-hierarchy
-
   androidTarget()
 
   listOf(
@@ -28,7 +25,7 @@ kotlin {
     }
     commonTest {
       dependencies {
-        implementation(kotlin("test"))
+        implementation(libs.kotlin.test)
       }
     }
   }
