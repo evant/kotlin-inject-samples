@@ -22,7 +22,7 @@ android {
     kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   buildTypes {
-    getByName("release") {
+    release {
       isMinifyEnabled = false
     }
   }
