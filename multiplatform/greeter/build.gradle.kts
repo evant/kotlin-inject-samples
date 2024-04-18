@@ -5,14 +5,6 @@ plugins {
   alias(libs.plugins.android.library).apply(false)
 }
 
-tasks.register("clean", Delete::class) {
-  delete(rootProject.buildDir)
-}
-
-subprojects {
-  tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
-    kotlinOptions {
-      jvmTarget = "11"
-    }
-  }
+tasks.wrapper {
+  jarFile = file("../../gradle/wrapper/gradle-wrapper.jar")
 }
