@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   gradle: circleci/gradle@1.0.10
+  android: circleci/android@2.5.0
 jobs:
   build-ponyinject:
     working_directory: ~/code/android/ponyinject
@@ -59,6 +60,32 @@ jobs:
           paths:
             - ~/.gradle
           key: echo-{{ checksum "build.gradle.kts" }}
+  build-greeter:
+    working_directory: ~/code/multiplatform/greeter
+    macos:
+      xcode: "15.3.0"
+    resource_class: macos.x86.medium.gen2
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout:
+          path: ~/code
+      - run:
+          name: install android tools
+          command: |
+            brew install android-commandlinetools
+            yes | /usr/local/share/android-commandlinetools/cmdline-tools/latest/bin/sdkmanager --licenses || true
+            echo sdk.dir=/usr/local/share/android-commandlinetools > local.properties
+      - restore_cache:
+          keys:
+            - greeter-{{ checksum "build.gradle.kts" }}
+      - run:
+          name: Run Tests and Checks
+          command: ./gradlew assemble
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: greeter-{{ checksum "build.gradle.kts" }}
 workflows:
   version: 2
   build:
@@ -66,3 +93,4 @@ workflows:
       - build-ponyinject
       - build-ponyktor
       - build-echo
+      - build-greeter
