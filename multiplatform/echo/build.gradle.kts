@@ -1,25 +1,20 @@
-import com.google.devtools.ksp.gradle.KspAATask
-import com.google.devtools.ksp.gradle.KspTask
-
 plugins {
-    kotlin("multiplatform") version "1.9.10"
-    id("com.google.devtools.ksp") version "1.9.10-1.0.13"
+    kotlin("multiplatform") version "1.9.23"
+    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
 }
 
 kotlin {
-    targetHierarchy.default()
-
     listOf(
         linuxX64(),
-        macosX64(), macosArm64()
-    ).forEach { target ->
-        target.binaries.executable()
+        macosX64(), macosArm64(),
+    ).forEach {
+        it.binaries.executable()
     }
 
     sourceSets {
         commonMain {
             dependencies {
-                implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.1")
+                implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.3")
             }
         }
     }
@@ -30,9 +25,9 @@ kotlin {
 // https://github.com/google/ksp/pull/1021
 
 dependencies {
-    add("kspLinuxX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
-    add("kspMacosX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
-    add("kspMacosArm64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.1")
+    add("kspLinuxX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    add("kspMacosX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    add("kspMacosArm64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
 }
 
 tasks.wrapper {
