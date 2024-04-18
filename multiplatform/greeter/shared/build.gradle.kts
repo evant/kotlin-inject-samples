@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
   alias(libs.plugins.kotlin.multiplatform)
   alias(libs.plugins.android.library)
@@ -33,7 +36,7 @@ kotlin {
 
 android {
   namespace = "com.fredporciuncula.inject.greeter"
-  compileSdk = 33
+  compileSdk = 34
   defaultConfig {
     minSdk = 24
   }
@@ -41,6 +44,10 @@ android {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
   }
+}
+
+tasks.withType<KotlinCompile>().configureEach {
+  compilerOptions.jvmTarget = JvmTarget.JVM_11
 }
 
 dependencies {
