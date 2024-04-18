@@ -5,7 +5,7 @@ jobs:
   build-ponyinject:
     working_directory: ~/code/android/ponyinject
     docker:
-      - image: cimg/android:2023.08
+      - image: cimg/android:2024.01
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -24,7 +24,7 @@ jobs:
   build-ponyktor:
     working_directory: ~/code/server/PonyKtor
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/openjdk:17.0
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -43,7 +43,7 @@ jobs:
   build-echo:
     working_directory: ~/code/multiplatform/echo
     docker:
-      - image: circleci/openjdk:11-jdk
+      - image: cimg/openjdk:17.0
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
