@@ -1,5 +1,6 @@
 package me.tatarka.inject.episodes
 
+import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.extracting
@@ -37,9 +38,9 @@ class EpisodesControllerTest {
         val component = TestComponent::class.create()
         val controller = component.controller
 
-        assertThat {
+        assertFailure {
             controller.allEpisodes(parametersOf("limit" to listOf("bad")))
-        }.isFailure().isInstanceOf(BadRequestException::class)
+        }.isInstanceOf(BadRequestException::class)
     }
 
     @Test
