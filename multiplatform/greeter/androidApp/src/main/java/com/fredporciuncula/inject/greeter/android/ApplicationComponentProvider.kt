@@ -1,13 +1,7 @@
 package com.fredporciuncula.inject.greeter.android
 
 import android.content.Context
-import me.tatarka.inject.annotations.Component
-import me.tatarka.inject.annotations.Provides
-
-@Component
-abstract class ApplicationComponent(
-  @get:Provides val context: Context,
-) : PlatformComponent
+import com.fredporciuncula.inject.greeter.ApplicationComponent
 
 interface ApplicationComponentProvider {
   val component: ApplicationComponent

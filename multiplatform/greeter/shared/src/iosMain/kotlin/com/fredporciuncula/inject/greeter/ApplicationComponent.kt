@@ -6,7 +6,7 @@ import me.tatarka.inject.annotations.Component
 abstract class ApplicationComponent : PlatformComponent {
   abstract val greeter: CommonGreeter
 
-  companion object {
-    fun create() = ApplicationComponent::class.create()
-  }
+  companion object
 }
+
+expect fun ApplicationComponent.Companion.create(): ApplicationComponent
