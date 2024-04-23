@@ -1,4 +1,4 @@
-package com.fredporciuncula.inject.greeter.android
+package com.fredporciuncula.inject.greeter
 
 import com.fredporciuncula.inject.greeter.AndroidGreeter
 import com.fredporciuncula.inject.greeter.Greeter
@@ -8,6 +8,5 @@ import me.tatarka.inject.annotations.Provides
 
 interface PlatformComponent {
   @Provides fun providePlatform(): Platform = Platform.Android
-  @Provides fun provideVersion(): Version = Version(BuildConfig.VERSION_NAME)
   @Provides fun AndroidGreeter.bind(): Greeter = this
 }
