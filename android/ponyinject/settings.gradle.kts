@@ -5,8 +5,8 @@ pluginManagement {
     }
     plugins {
         id("com.android.application") version "8.2.0"
-        kotlin("android") version "1.9.23"
-        id("com.google.devtools.ksp") version "1.9.23-1.0.20"
+        kotlin("android") version "2.0.0"
+        id("com.google.devtools.ksp") version "2.0.0-1.0.22"
         id("androidx.navigation.safeargs.kotlin") version "2.7.7"
     }
 }

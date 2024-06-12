@@ -1,11 +1,11 @@
 [versions]
 agp = '8.2.0'
 androidx-activity = '1.9.0'
-compose-bom = '2024.04.01' # https://developer.android.com/jetpack/compose/bom/bom-mapping
-compose-compiler = '1.5.12'
-kotlin = '1.9.23'
-ksp = '1.9.23-1.0.20'
+compose-bom = '2024.06.00' # https://developer.android.com/jetpack/compose/bom/bom-mapping
+compose-compiler = '1.5.14'
+kotlin = '2.0.0'
 kotlinInject = '0.7.1'
+ksp = '2.0.0-1.0.22'
 
 [libraries]
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
@@ -27,3 +27,4 @@ android-library = { id = 'com.android.library', version.ref = 'agp' }
 kotlin-android = { id = 'org.jetbrains.kotlin.android', version.ref = 'kotlin' }
 kotlin-multiplatform = { id = 'org.jetbrains.kotlin.multiplatform', version.ref = 'kotlin' }
 ksp = { id = 'com.google.devtools.ksp', version.ref = 'ksp' }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

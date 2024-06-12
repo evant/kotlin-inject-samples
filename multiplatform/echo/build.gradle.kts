@@ -1,6 +1,6 @@
 plugins {
-    kotlin("multiplatform") version "1.9.23"
-    id("com.google.devtools.ksp") version "1.9.23-1.0.20"
+    kotlin("multiplatform") version "2.0.0"
+    id("com.google.devtools.ksp") version "2.0.0-1.0.22"
 }
 
 kotlin {

@@ -1,17 +1,15 @@
 package me.tatarka.inject
 
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.features.BadRequestException
-import io.ktor.features.ContentNegotiation
-import io.ktor.features.StatusPages
-import io.ktor.http.HttpStatusCode
-import io.ktor.response.respond
-import io.ktor.routing.routing
-import io.ktor.serialization.json
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.plugins.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import kotlinx.serialization.json.Json
 import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
@@ -33,7 +31,7 @@ fun app(router: router, @Assisted app: Application) {
             json(Json { encodeDefaults = true })
         }
         install(StatusPages) {
-            exception<BadRequestException> { cause ->
+            exception<BadRequestException> { call, cause ->
                 call.respond(HttpStatusCode.BadRequest, ErrorResponse(400, cause.message))
             }
         }
