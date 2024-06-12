@@ -13,6 +13,7 @@ import io.ktor.serialization.json
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import kotlinx.serialization.json.Json
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 
 fun main() {
@@ -26,7 +27,7 @@ typealias app = (Application) -> Unit
  * Sets up the application.
  */
 @Inject
-fun app(router: router, app: Application) {
+fun app(router: router, @Assisted app: Application) {
     app.apply {
         install(ContentNegotiation) {
             json(Json { encodeDefaults = true })

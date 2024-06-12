@@ -1,5 +1,6 @@
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Inject
+import me.tatarka.inject.annotations.KmpComponentCreate
 import me.tatarka.inject.annotations.Provides
 
 typealias Args = Array<String>
@@ -9,6 +10,7 @@ abstract class ApplicationComponent(@get:Provides val args: Args) {
     abstract val app: App
 }
 
+@KmpComponentCreate
 expect fun createApplicationComponent(args: Args): ApplicationComponent
 
 @Inject

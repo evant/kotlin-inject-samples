@@ -5,6 +5,7 @@ import io.ktor.response.respond
 import io.ktor.routing.Routing
 import io.ktor.routing.get
 import io.ktor.util.getOrFail
+import me.tatarka.inject.annotations.Assisted
 import me.tatarka.inject.annotations.Inject
 import me.tatarka.inject.episodes.EpisodesController
 
@@ -16,7 +17,7 @@ typealias router = (Routing) -> Unit
 @Inject
 fun router(
     episodesController: EpisodesController,
-    routing: Routing,
+    @Assisted routing: Routing,
 ) {
     routing.apply {
         get("episode/all") {

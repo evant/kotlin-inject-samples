@@ -4,8 +4,8 @@ androidx-activity = '1.9.0'
 compose-bom = '2024.04.01' # https://developer.android.com/jetpack/compose/bom/bom-mapping
 compose-compiler = '1.5.12'
 kotlin = '1.9.23'
-kotlinInject = '0.6.3'
 ksp = '1.9.23-1.0.20'
+kotlinInject = '0.7.1'
 
 [libraries]
 androidx-activity-compose = { module = 'androidx.activity:activity-compose', version.ref = 'androidx-activity' }
@@ -19,7 +19,7 @@ compose-ui-tooling = { module = 'androidx.compose.ui:ui-tooling' }
 compose-ui-toolingPreview = { module = 'androidx.compose.ui:ui-tooling-preview' }
 kotlin-test = { module = 'org.jetbrains.kotlin:kotlin-test', version.ref = 'kotlin' }
 kotlinInject-compiler = { module = 'me.tatarka.inject:kotlin-inject-compiler-ksp', version.ref = 'kotlinInject' }
-kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime', version.ref = 'kotlinInject' }
+kotlinInject-runtime = { module = 'me.tatarka.inject:kotlin-inject-runtime-kmp', version.ref = 'kotlinInject' }
 
 [plugins]
 android-application = { id = 'com.android.application', version.ref = 'agp' }
