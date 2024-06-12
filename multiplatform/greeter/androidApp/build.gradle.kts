@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.android.application)
   alias(libs.plugins.ksp)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -15,11 +16,7 @@ android {
     versionName = "1.0"
   }
   buildFeatures {
-    compose = true
     buildConfig = true
-  }
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
   }
   buildTypes {
     release {

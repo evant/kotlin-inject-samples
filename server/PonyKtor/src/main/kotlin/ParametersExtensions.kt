@@ -3,8 +3,8 @@
  */
 package me.tatarka.inject
 
-import io.ktor.features.ParameterConversionException
-import io.ktor.http.Parameters
+import io.ktor.http.*
+import io.ktor.server.plugins.*
 
 /**
  * A typealias to make it clear we are accepting query parameters.

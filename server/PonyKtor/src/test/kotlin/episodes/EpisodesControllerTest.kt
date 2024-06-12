@@ -4,11 +4,10 @@ import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.extracting
-import assertk.assertions.isFailure
 import assertk.assertions.isInstanceOf
 import assertk.assertions.prop
-import io.ktor.features.BadRequestException
-import io.ktor.http.parametersOf
+import io.ktor.http.*
+import io.ktor.server.plugins.*
 import me.tatarka.inject.Episode
 import me.tatarka.inject.Response
 import me.tatarka.inject.TestApplicationComponent
