@@ -14,7 +14,7 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.3")
+                implementation("me.tatarka.inject:kotlin-inject-runtime-kmp:0.7.1")
             }
         }
     }
@@ -25,9 +25,9 @@ kotlin {
 // https://github.com/google/ksp/pull/1021
 
 dependencies {
-    add("kspLinuxX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
-    add("kspMacosX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
-    add("kspMacosArm64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    add("kspLinuxX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
+    add("kspMacosX64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
+    add("kspMacosArm64", "me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
 }
 
 tasks.wrapper {

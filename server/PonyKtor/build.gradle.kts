@@ -21,8 +21,8 @@ java {
 }
 
 dependencies {
-    implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.3")
-    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    implementation("me.tatarka.inject:kotlin-inject-runtime:0.7.1")
+    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
 
     implementation("io.ktor:ktor-server-netty:1.5.3")
     implementation("ch.qos.logback:logback-classic:1.4.14")
@@ -35,7 +35,7 @@ dependencies {
     implementation("org.xerial:sqlite-jdbc:3.34.0")
     implementation( "com.zaxxer:HikariCP:3.4.5")
 
-    kspTest("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    kspTest("me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.ktor:ktor-server-test-host:1.5.3")
     testImplementation("com.willowtreeapps.assertk:assertk:0.28.1")

@@ -69,8 +69,8 @@ android {
 dependencies {
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
-    implementation("me.tatarka.inject:kotlin-inject-runtime:0.6.3")
-    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.6.3")
+    implementation("me.tatarka.inject:kotlin-inject-runtime:0.7.1")
+    ksp("me.tatarka.inject:kotlin-inject-compiler-ksp:0.7.1")
 
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     debugImplementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
