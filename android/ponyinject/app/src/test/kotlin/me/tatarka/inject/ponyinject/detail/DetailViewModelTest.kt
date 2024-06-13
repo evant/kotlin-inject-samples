@@ -1,20 +1,19 @@
 package me.tatarka.inject.ponyinject.detail
 
 import androidx.lifecycle.SavedStateHandle
+import androidx.paging.testing.asSnapshot
 import assertk.all
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import assertk.assertions.prop
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.ponyinject.CoroutineTestRule
 import me.tatarka.inject.ponyinject.TestApplicationComponent
 import me.tatarka.inject.ponyinject.api.EpisodesRepository
 import me.tatarka.inject.ponyinject.create
-import me.tatarka.inject.ponyinject.waitForSnapshot
 import org.junit.Rule
 import org.junit.Test
 
@@ -30,7 +29,7 @@ class DetailViewModelTest {
         val component = TestComponent::class.create()
         val repository = component.repository
         val viewModel = component.viewModel(SavedStateHandle(mapOf("episodeId" to 2)))
-        repository.episodes.first().waitForSnapshot()
+        repository.episodes.asSnapshot()
 
         assertThat(viewModel.episodeDetail.first()).isNotNull().all {
             prop(EpisodeDetailViewData::title).isEqualTo("Friendship is Magic, part 2")

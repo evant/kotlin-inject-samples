@@ -1,17 +1,15 @@
 package me.tatarka.inject.ponyinject.episodes
 
+import androidx.paging.testing.asSnapshot
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.extracting
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.ponyinject.CoroutineTestRule
 import me.tatarka.inject.ponyinject.TestApplicationComponent
 import me.tatarka.inject.ponyinject.api.Episode
 import me.tatarka.inject.ponyinject.create
-import me.tatarka.inject.ponyinject.waitForSnapshot
 import org.junit.Rule
 import org.junit.Test
 
@@ -26,9 +24,9 @@ class EpisodesViewModelTest {
     fun fetches_episodes() = runTest {
         val component = TestComponent::class.create()
         val viewModel = component.viewModel
-        val episodes = viewModel.episodes.first()
+        val episodes = viewModel.episodes.asSnapshot()
 
-        assertThat(episodes.waitForSnapshot().items).extracting(Episode::name).containsExactly(
+        assertThat(episodes).extracting(Episode::name).containsExactly(
             "Friendship is Magic, part 1",
             "Friendship is Magic, part 2"
         )
