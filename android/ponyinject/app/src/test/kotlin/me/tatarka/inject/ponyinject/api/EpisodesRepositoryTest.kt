@@ -1,5 +1,7 @@
 package me.tatarka.inject.ponyinject.api
 
+import androidx.paging.testing.asSnapshot
+import assertk.assertFailure
 import assertk.assertThat
 import assertk.assertions.*
 import kotlinx.coroutines.flow.first
@@ -19,9 +21,9 @@ class EpisodesRepositoryTest {
     fun fetches_episodes_from_the_api() = runTest {
         val component = TestComponent::class.create()
         val repository = component.episodesRepository
-        val episodes = repository.episodes.first()
+        val episodes = repository.episodes.asSnapshot()
 
-        assertThat(episodes.waitForSnapshot().items).extracting(Episode::name).containsExactly(
+        assertThat(episodes).extracting(Episode::name).containsExactly(
             "Friendship is Magic, part 1",
             "Friendship is Magic, part 2"
         )
@@ -38,9 +40,8 @@ class EpisodesRepositoryTest {
                 }
             )))
         val repository = component.episodesRepository
-        val episodes = repository.episodes.first()
 
-        assertThat(episodes.waitForError())
+        assertFailure { repository.episodes.asSnapshot()  }
             .isInstanceOf(IOException::class)
             .hasMessage("api call failed")
     }
@@ -49,7 +50,7 @@ class EpisodesRepositoryTest {
     fun fetches_a_single_episode_from_the_cache() = runTest {
         val component = TestComponent::class.create()
         val repository = component.episodesRepository
-        repository.episodes.first().waitForSnapshot()
+        repository.episodes.asSnapshot()
         val episode = repository.episode(1).first()
 
         assertThat(episode).isNotNull()
