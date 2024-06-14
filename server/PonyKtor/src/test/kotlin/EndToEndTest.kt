@@ -1,17 +1,18 @@
 package me.tatarka.inject
 
-import assertk.all
+import assertk.assertAll
 import assertk.assertThat
 import assertk.assertions.containsExactly
 import assertk.assertions.extracting
 import assertk.assertions.isEqualTo
-import assertk.assertions.isNotNull
 import assertk.assertions.prop
-import io.ktor.http.HttpMethod
-import io.ktor.server.testing.handleRequest
-import io.ktor.server.testing.withTestApplication
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.server.engine.*
+import io.ktor.server.testing.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import me.tatarka.inject.annotations.Component
-import me.tatarka.inject.assert.body
 import me.tatarka.inject.assert.hasStatusCode
 import me.tatarka.inject.assert.isJson
 import me.tatarka.inject.db.Episodes
@@ -28,19 +29,22 @@ import java.time.LocalDate
 /**
  * An example of an end-to-end test using an in-memory sqlite db.
  */
+@OptIn(ExperimentalSerializationApi::class)
 class EndToEndTest {
 
     @Test
-    fun `returns a page of all episodes`() = withTestApplication {
-        val component = TestComponent::class.create()
-        prePopulateDb(component.db)
-        component.app(application)
+    fun `returns a page of all episodes`() = testApplication {
+        application {
+            val component = TestComponent::class.create()
+            prePopulateDb(component.db)
+            component.app(this)
+        }
 
-        val request = handleRequest(HttpMethod.Get, "/episode/all")
+        val response = client.get("/episode/all")
 
-        assertThat(request.response).all {
-            hasStatusCode(200)
-            body().isNotNull().isJson<Response<Episode>>()
+        assertAll {
+            assertThat(response).hasStatusCode(200)
+            assertThat(response.bodyAsText()).isJson<Response<Episode>>()
                 .prop(Response<Episode>::data).extracting(Episode::name).containsExactly(
                     "Friendship is Magic, part 1",
                     "Friendship is Magic, part 2",
@@ -49,30 +53,34 @@ class EndToEndTest {
     }
 
     @Test
-    fun `returns a 400 on invalid query param type`() = withTestApplication {
-        val component = TestComponent::class.create()
-        component.app(application)
+    fun `returns a 400 on invalid query param type`() = testApplication {
+        application {
+            val component = TestComponent::class.create()
+            component.app(this)
+        }
 
-        val request = handleRequest(HttpMethod.Get, "/episode/all?offset=bad")
+        val response = client.get("/episode/all?offset=bad")
 
-        assertThat(request.response).all {
-            hasStatusCode(400)
-            body().isNotNull().isJson<ErrorResponse>()
+        assertAll {
+            assertThat(response).hasStatusCode(400)
+            assertThat(response.bodyAsText()).isJson<ErrorResponse>()
                 .prop(ErrorResponse::error).isEqualTo("Request parameter offset couldn't be parsed/converted to Int")
         }
     }
 
     @Test
-    fun `returns a single episode by id`() = withTestApplication {
-        val component = TestComponent::class.create()
-        prePopulateDb(component.db)
-        component.app(application)
+    fun `returns a single episode by id`() = testApplication {
+        application {
+            val component = TestComponent::class.create()
+            prePopulateDb(component.db)
+            component.app(this)
+        }
 
-        val request = handleRequest(HttpMethod.Get, "/episode/1")
+        val response = client.get("/episode/1")
 
-        assertThat(request.response).all {
-            hasStatusCode(200)
-            body().isNotNull().isJson<Response<Episode>>()
+        assertAll {
+            assertThat(response).hasStatusCode(200)
+            assertThat(response.bodyAsText()).isJson<Response<Episode>>()
                 .prop(Response<Episode>::data).extracting(Episode::id, Episode::name).containsExactly(
                     1 to "Friendship is Magic, part 1",
                 )
@@ -80,16 +88,18 @@ class EndToEndTest {
     }
 
     @Test
-    fun `returns a single episode by overall number`() = withTestApplication {
-        val component = TestComponent::class.create()
-        prePopulateDb(component.db)
-        component.app(application)
+    fun `returns a single episode by overall number`() = testApplication {
+        application {
+            val component = TestComponent::class.create()
+            prePopulateDb(component.db)
+            component.app(this)
+        }
 
-        val request = handleRequest(HttpMethod.Get, "/episode/by-overall/1")
+        val response = client.get("/episode/by-overall/1")
 
-        assertThat(request.response).all {
-            hasStatusCode(200)
-            body().isNotNull().isJson<Response<Episode>>()
+        assertAll {
+            assertThat(response).hasStatusCode(200)
+            assertThat(response.bodyAsText()).isJson<Response<Episode>>()
                 .prop(Response<Episode>::data).extracting(Episode::overall, Episode::name).containsExactly(
                     1 to "Friendship is Magic, part 1",
                 )
@@ -97,16 +107,18 @@ class EndToEndTest {
     }
 
     @Test
-    fun `returns a single episode by season`() = withTestApplication {
-        val component = TestComponent::class.create()
-        prePopulateDb(component.db)
-        component.app(application)
+    fun `returns a single episode by season`() = testApplication {
+        application {
+            val component = TestComponent::class.create()
+            prePopulateDb(component.db)
+            component.app(this)
+        }
 
-        val request = handleRequest(HttpMethod.Get, "/episode/by-season/1/1")
+        val response = client.get("/episode/by-season/1/1")
 
-        assertThat(request.response).all {
-            hasStatusCode(200)
-            body().isNotNull().isJson<Response<Episode>>()
+        assertAll {
+            assertThat(response).hasStatusCode(200)
+            assertThat(response.bodyAsText()).isJson<Response<Episode>>()
                 .prop(Response<Episode>::data).extracting(Episode::season, Episode::episode, Episode::name)
                 .containsExactly(
                     Triple(1, 1, "Friendship is Magic, part 1")
